@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <header>
+    <script src="myscripts.js"></script>
+    <script>
+      function doThis() {
+        console.log(`In doThis()`);
+      }
+    </script>
+  </header>
+  <body>
+    <h2>HTML Forms</h2>
+
+    <h3>Successful GET call with no headers</h3>
+    <p>Call <b>http://localhost:8081/listUsers</b></p>
+    <button onclick="performGETWithNoHeaders()">Click me</button>
+    <textarea
+      id="response1"
+      readonly
+      rows="8"
+      style="width: 100%; resize: none"
+    ></textarea>
+
+    <h3>GET call with no headers, but returns 404 error (wrong url)</h3>
+    <p>Call <b>http://localhost:8081/doesNotExist</b></p>
+    <button onclick="performGETWithNoHeaders_404_error()">Click me</button>
+    <textarea
+      id="response2"
+      readonly
+      rows="8"
+      style="width: 100%; resize: none"
+    ></textarea>
+
+    <h3>Successful POST call with headers, with data</h3>
+    <p>Call <b>http://localhost:8081/user</b></p>
+    <button onclick="performPOSTWithHeadersAndJSONBody()">Click me</button>
+    <textarea
+      id="response3"
+      readonly
+      rows="8"
+      style="width: 100%; resize: none"
+    ></textarea>
+
+    <h3>POST call with headers, with data, but fails with error</h3>
+    <p>
+      Call
+      <b>http://localhost:8081/user, but input data not prepared properly</b>
+    </p>
+    <button onclick="performPOSTWithHeadersAndJSONBody_With_Error()">
+      Click me
+    </button>
+    <textarea
+      id="response4"
+      readonly
+      rows="8"
+      style="width: 100%; resize: none"
+    ></textarea>
+  </body>
+</html>
