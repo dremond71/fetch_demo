@@ -24,12 +24,12 @@ async function performGETWithNoHeaders() {
 
     console.log(`The response: ${responseAsString}`);
 
-    document.getElementById('response1').innerHTML = responseAsString;
+    document.getElementById('response1').value = responseAsString;
   } else {
     // Handle errors
     const errorMessage = `${response.status} ${response.statusText}`;
     console.log(`An error occurred => ${errorMessage}`);
-    document.getElementById('response1').innerHTML = errorMessage;
+    document.getElementById('response1').value = errorMessage;
   }
 }
 
@@ -51,23 +51,32 @@ async function performGETWithNoHeaders_404_error() {
 
     console.log(`The response: ${responseAsString}`);
 
-    document.getElementById('response2').innerHTML = responseAsString;
+    document.getElementById('response2').value = responseAsString;
   } else {
     // Handle errors
     const errorMessage = `${response.status} ${response.statusText}`;
     console.log(`An error occurred => ${errorMessage}`);
-    document.getElementById('response2').innerHTML = errorMessage;
+    document.getElementById('response2').value = errorMessage;
   }
 }
 
 async function performPOSTWithHeadersAndJSONBody() {
-  let user = {
-    name: `user_${Date.now()}`,
-    password: `password_${Date.now()}`,
-    profession: `profession__${Date.now()}`,
+  let userDefaultInfo = {
+ 
     id: Date.now(),
   };
 
+  let newUser = undefined;
+  const textValue = document.getElementById('response3').value;
+  try {
+     newUser = JSON.parse(textValue);
+  }
+  catch(error) {
+     alert('Invalid JSON');
+     return;
+  }
+
+  let user = Object.assign({},userDefaultInfo,newUser);
   // the url
   const url = 'http://localhost:8081/user';
   // extra arguments you can pass to fetch:
@@ -92,35 +101,42 @@ async function performPOSTWithHeadersAndJSONBody() {
   const response = await fetch(url, argumentsForFetch);
 
   if (response.status >= 200 && response.status <= 299) {
-    // in this case, we get a `201 Created`, so there is
-    // no JSON data returned. (See server.js for details)
 
-    // so....no need to do this:
-    ///////const jsonResponse = await response.json();
-    ///////const responseAsString = JSON.stringify(jsonResponse,null,2);
+    const jsonResponse = await response.json();
+    const responseAsString = JSON.stringify(jsonResponse,null,2);
+    console.log(responseAsString);
 
     // when you stop the debugger in browser, you can see that
     // response object above has: status and statusText fields
 
-    const successMessage = `${response.status} ${response.statusText}`;
+    const successMessage = `${response.status} ${response.statusText} : ${jsonResponse.message}`;
     console.log(`The response: ${successMessage}`);
 
-    document.getElementById('response3').innerHTML = successMessage;
+    document.getElementById('response3').value = successMessage;
   } else {
     // Handle errors
     const errorMessage = `${response.status} ${response.statusText}`;
     console.log(`An error occurred => ${errorMessage}`);
-    document.getElementById('response3').innerHTML = errorMessage;
+    document.getElementById('response3').value = errorMessage;
   }
 }
 
 async function performPOSTWithHeadersAndJSONBody_With_Error() {
-  let user = {
-    name: `user_${Date.now()}`,
-    password: `password_${Date.now()}`,
-    profession: `profession__${Date.now()}`,
+  let userDefaultInfo = {
     id: Date.now(),
   };
+
+  let newUser = undefined;
+  const textValue = document.getElementById('response4').value;
+  try {
+     newUser = JSON.parse(textValue);
+  }
+  catch(error) {
+     alert('Invalid JSON');
+     return;
+  }
+
+  let user = Object.assign({},userDefaultInfo,newUser);
 
   // the url
   const url = 'http://localhost:8081/user';
@@ -149,26 +165,23 @@ async function performPOSTWithHeadersAndJSONBody_With_Error() {
   const response = await fetch(url, argumentsForFetch);
 
   if (response.status >= 200 && response.status <= 299) {
-    // in this case, we get a `201 Created`, so there is
-    // no JSON data returned. (See server.js for details)
-
-    // so....no need to do this:
-    ///////const jsonResponse = await response.json();
-    ///////const responseAsString = JSON.stringify(jsonResponse,null,2);
+    const jsonResponse = await response.json();
+    const responseAsString = JSON.stringify(jsonResponse,null,2);
+    console.log(responseAsString);
 
     // when you stop the debugger in browser, you can see that
     // response object above has: status and statusText fields
 
-    const successMessage = `${response.status} ${response.statusText}`;
+    const successMessage = `${response.status} ${response.statusText} : ${jsonResponse.message}`;
     console.log(`The response: ${successMessage}`);
 
-    document.getElementById('response4').innerHTML = successMessage;
+    document.getElementById('response4').value = successMessage;
   } else {
     // Handle errors
     const extraInfo = `server.js will throw this error: 'SyntaxError: Unexpected token o in JSON at position 1
        at JSON.parse (<anonymous>)'`;
     const errorMessage = `${response.status} ${response.statusText}\n${extraInfo}`;
     console.log(`An error occurred => ${errorMessage}`);
-    document.getElementById('response4').innerHTML = errorMessage;
+    document.getElementById('response4').value = errorMessage;
   }
 }

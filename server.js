@@ -58,7 +58,10 @@ app.post('/user', (req, res) => {
   console.log(`user added:\n${JSON.stringify(user)}`);
   users.push(user);
 
-  res.status(201).send('User added to the database');
+  const response = {
+    message : 'User added to the database'
+  };
+  res.status(201).send(response);
 });
 
 const server = app.listen(8081, function () {
