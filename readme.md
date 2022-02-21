@@ -3,7 +3,8 @@
 This is a very basic front-end and back-end application meant to showcase how to use the `fetch` method in javascript.
 
 ## Pre-requisites
-- Install git 
+
+- Install git
 - Install node.js
 
 ## Setup
@@ -33,19 +34,25 @@ Then in the browser, click on the appropriate button to call that function.
 
 ![](./debug1.png)
 
-
 ### Example JSON for POST methods
 
- Copy this JSON and paste it into the text area of a POST example. Change the values of the variable values, but not the variable names.
+Copy this JSON and paste it into the text area of a POST example. Change the values of the variable values, but not the variable names.
 
 ```json
-  {
-    "name": "user",
-    "password": "password1",
-    "profession": "teacher"
-  }
+{
+  "name": "user",
+  "password": "password1",
+  "profession": "teacher"
+}
 ```
 
 ## Stop the server
 
 When you are done, return to the command line where you started the server, and press CTRL C.
+
+## To lint and prettify the code
+
+```sh
+npm run lint:fix
+npm run prettier:fix
+```

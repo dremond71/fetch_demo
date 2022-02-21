@@ -62,21 +62,19 @@ async function performGETWithNoHeaders_404_error() {
 
 async function performPOSTWithHeadersAndJSONBody() {
   let userDefaultInfo = {
- 
     id: Date.now(),
   };
 
   let newUser = undefined;
   const textValue = document.getElementById('response3').value;
   try {
-     newUser = JSON.parse(textValue);
-  }
-  catch(error) {
-     alert('Invalid JSON');
-     return;
+    newUser = JSON.parse(textValue);
+  } catch (error) {
+    alert('Invalid JSON');
+    return;
   }
 
-  let user = Object.assign({},userDefaultInfo,newUser);
+  let user = Object.assign({}, userDefaultInfo, newUser);
   // the url
   const url = 'http://localhost:8081/user';
   // extra arguments you can pass to fetch:
@@ -101,9 +99,8 @@ async function performPOSTWithHeadersAndJSONBody() {
   const response = await fetch(url, argumentsForFetch);
 
   if (response.status >= 200 && response.status <= 299) {
-
     const jsonResponse = await response.json();
-    const responseAsString = JSON.stringify(jsonResponse,null,2);
+    const responseAsString = JSON.stringify(jsonResponse, null, 2);
     console.log(responseAsString);
 
     // when you stop the debugger in browser, you can see that
@@ -129,14 +126,13 @@ async function performPOSTWithHeadersAndJSONBody_With_Error() {
   let newUser = undefined;
   const textValue = document.getElementById('response4').value;
   try {
-     newUser = JSON.parse(textValue);
-  }
-  catch(error) {
-     alert('Invalid JSON');
-     return;
+    newUser = JSON.parse(textValue);
+  } catch (error) {
+    alert('Invalid JSON');
+    return;
   }
 
-  let user = Object.assign({},userDefaultInfo,newUser);
+  let user = Object.assign({}, userDefaultInfo, newUser);
 
   // the url
   const url = 'http://localhost:8081/user';
@@ -166,7 +162,7 @@ async function performPOSTWithHeadersAndJSONBody_With_Error() {
 
   if (response.status >= 200 && response.status <= 299) {
     const jsonResponse = await response.json();
-    const responseAsString = JSON.stringify(jsonResponse,null,2);
+    const responseAsString = JSON.stringify(jsonResponse, null, 2);
     console.log(responseAsString);
 
     // when you stop the debugger in browser, you can see that

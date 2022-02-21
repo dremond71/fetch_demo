@@ -59,7 +59,7 @@ app.post('/user', (req, res) => {
   users.push(user);
 
   const response = {
-    message : 'User added to the database'
+    message: 'User added to the database',
   };
   res.status(201).send(response);
 });
